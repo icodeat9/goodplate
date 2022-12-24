@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="d-flex">
+    <side-bar v-if="this.$store.state.userState"/>
+    <div class="content d-flex flex-column">
+
+      <top-bar v-if="this.$store.state.userState"/>
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SideBar from "@/renderer/components/SideBar.vue";
+import TopBar from "@/renderer/components/TopBar.vue"
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { SideBar, TopBar },
+};
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  color: $main-color;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
